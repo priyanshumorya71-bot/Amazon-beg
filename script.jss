@@ -285,7 +285,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Encode for WhatsApp URL
         const encodedMessage = encodeURIComponent(orderDetails);
-        const phoneNumber = "919876543210"; // Replace with actual admin number
+        const phoneNumber = "917643806356"; // Replace with actual admin number
         
         // Open WhatsApp
         window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
