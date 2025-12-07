@@ -3,55 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuickShop - Admin Panel</title>
+    <title>QuickShop - Admin Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Admin specific styles */
+        /* Admin Specific Styles */
         .admin-container {
             min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
         }
         
-        /* Admin Header with Shop Button */
+        .login-box {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .login-box h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: #ff9900;
+            outline: none;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: #ff9900;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        
+        .login-btn:hover {
+            background: #e68900;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        /* Admin Dashboard */
+        .admin-dashboard {
+            display: none;
+            min-height: 100vh;
+            background: #f5f5f5;
+        }
+        
         .admin-header {
             background: white;
-            padding: 15px 0;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 100;
         }
         
-        .admin-header .container {
+        .admin-header-content {
             display: flex;
             align-items: center;
-            gap: 20px;
-        }
-        
-        /* SHOP BUTTON - Logo ke PAHLE */
-        .shop-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: #ff9900;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-        
-        .shop-btn:hover {
-            background: #e68900;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 153, 0, 0.3);
+            justify-content: space-between;
+            padding: 15px 20px;
         }
         
         .admin-logo {
@@ -64,31 +118,22 @@
         }
         
         .admin-actions {
-            margin-left: auto;
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
         }
         
-        /* Login box styles */
-        .login-box {
-            background: white;
-            border-radius: 10px;
-            padding: 40px;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        .shop-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #25D366;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
         }
-        
-        /* Admin dashboard */
-        .admin-dashboard {
-            display: none;
-            min-height: 100vh;
-            background: #f5f7fa;
-        }
-        
-        /* Rest of your admin styles... */
-        /* (Previous wale sab styles yahan rahenge) */
         
         .logout-btn {
             background: #e74c3c;
@@ -97,62 +142,119 @@
             padding: 8px 15px;
             border-radius: 5px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-weight: 600;
         }
         
-        .admin-stats {
-            padding: 30px 0;
-            background: white;
-            margin-bottom: 30px;
+        .admin-main {
+            padding: 30px 20px;
         }
         
-        .stats-grid {
+        .stats-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 20px;
+            margin-bottom: 30px;
         }
         
         .stat-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
+            background: white;
+            padding: 25px;
             border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
             text-align: center;
         }
         
-        .orders-section {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 30px;
+        .stat-card h3 {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
         }
         
-        /* Add responsive design */
+        .stat-card .number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a237e;
+        }
+        
+        .orders-container {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+        
+        .orders-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .orders-table th {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: left;
+            border-bottom: 2px solid #e9ecef;
+            color: #495057;
+            font-weight: 600;
+        }
+        
+        .orders-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .order-status {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-confirmed {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .status-delivered {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .view-btn {
+            background: #3498db;
+            color: white;
+        }
+        
         @media (max-width: 768px) {
-            .admin-header .container {
-                flex-wrap: wrap;
+            .stats-cards {
+                grid-template-columns: 1fr;
             }
             
-            .shop-btn {
-                order: 1;
-                margin-bottom: 10px;
-            }
-            
-            .admin-logo {
-                order: 2;
-            }
-            
-            .admin-actions {
-                order: 3;
-                width: 100%;
-                justify-content: space-between;
-                margin-top: 10px;
-            }
-            
-            .login-box {
-                padding: 30px 20px;
+            .orders-table {
+                display: block;
+                overflow-x: auto;
             }
         }
     </style>
@@ -164,44 +266,36 @@
             <h2><i class="fas fa-user-shield"></i> Admin Login</h2>
             <div class="form-group">
                 <label for="adminUsername">Username</label>
-                <input type="text" id="adminUsername" placeholder="Enter username">
+                <input type="text" id="adminUsername" placeholder="Enter admin username">
             </div>
             <div class="form-group">
                 <label for="adminPassword">Password</label>
                 <input type="password" id="adminPassword" placeholder="Enter password">
             </div>
-            <button class="login-btn" id="loginBtn">Login</button>
-            <div class="error-message" id="loginError">Invalid username or password</div>
+            <button class="login-btn" id="loginBtn">Login to Dashboard</button>
+            <div class="error-message" id="loginError">Invalid credentials!</div>
             
-            <!-- Login screen pe bhi shop button -->
-            <div style="margin-top: 20px; text-align: center;">
-                <a href="index.html" class="shop-btn" style="display: inline-flex;">
-                    <i class="fas fa-store"></i> Go to Shop
+            <div style="margin-top: 25px; text-align: center; padding-top: 20px; border-top: 1px solid #eee;">
+                <p style="color: #666; font-size: 14px; margin-bottom: 10px;">Need help?</p>
+                <a href="https://wa.me/919876543210" class="shop-link" target="_blank" style="display: inline-flex;">
+                    <i class="fab fa-whatsapp"></i> Contact Admin via WhatsApp
                 </a>
             </div>
         </div>
     </div>
 
-    <!-- Admin Dashboard (Initially Hidden) -->
+    <!-- Admin Dashboard -->
     <div class="admin-dashboard" id="adminDashboard">
-        <!-- HEADER with Shop Button -->
         <header class="admin-header">
-            <div class="container">
-                <!-- SHOP BUTTON - LOGO KE PAHLE -->
-                <a href="index.html" class="shop-btn">
-                    <i class="fas fa-store"></i>
-                    <span>Go to Shop</span>
-                </a>
-                
-                <!-- LOGO -->
+            <div class="admin-header-content">
                 <div class="admin-logo">
-                    <i class="fas fa-user-shield"></i>
-                    <span>QuickShop Admin</span>
+                    <i class="fas fa-chart-line"></i>
+                    <span>QuickShop Dashboard</span>
                 </div>
-                
-                <!-- Admin Actions -->
                 <div class="admin-actions">
-                    <span id="adminName">Admin User</span>
+                    <a href="index.html" class="shop-link">
+                        <i class="fas fa-store"></i> Go to Shop
+                    </a>
                     <button class="logout-btn" id="logoutBtn">
                         <i class="fas fa-sign-out-alt"></i> Logout
                     </button>
@@ -209,314 +303,238 @@
             </div>
         </header>
 
-        <!-- Dashboard Content -->
-        <section class="admin-stats">
-            <div class="container">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <h3>Total Orders</h3>
-                        <div class="number" id="totalOrders">0</div>
-                    </div>
-                    <div class="stat-card">
-                        <h3>Pending Orders</h3>
-                        <div class="number" id="pendingOrders">0</div>
-                    </div>
-                    <div class="stat-card">
-                        <h3>Total Revenue</h3>
-                        <div class="number" id="totalRevenue">₹0</div>
-                    </div>
-                    <div class="stat-card">
-                        <h3>Today's Orders</h3>
-                        <div class="number" id="todaysOrders">0</div>
-                    </div>
+        <main class="admin-main container">
+            <!-- Statistics Cards -->
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <h3>Total Orders</h3>
+                    <div class="number" id="totalOrders">12</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Pending Orders</h3>
+                    <div class="number" id="pendingOrders">3</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Revenue</h3>
+                    <div class="number" id="totalRevenue">₹45,280</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Today's Orders</h3>
+                    <div class="number" id="todaysOrders">2</div>
                 </div>
             </div>
-        </section>
 
-        <main class="admin-main">
-            <div class="container">
-                <section class="orders-section">
-                    <div class="orders-header">
-                        <h2>Recent Orders</h2>
-                        <div class="filter-orders">
-                            <select id="orderFilter">
-                                <option value="all">All Orders</option>
-                                <option value="pending">Pending</option>
-                                <option value="confirmed">Confirmed</option>
-                                <option value="delivered">Delivered</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="table-responsive">
-                        <table class="orders-table">
-                            <thead>
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>Customer</th>
-                                    <th>Date</th>
-                                    <th>Amount</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="ordersTableBody">
-                                <!-- Orders will be loaded here -->
-                                <tr>
-                                    <td colspan="6" style="text-align: center; padding: 40px;">
-                                        <i class="fas fa-shopping-cart" style="font-size: 48px; color: #ddd; margin-bottom: 20px;"></i>
-                                        <p>No orders yet</p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
+            <!-- Orders Table -->
+            <div class="orders-container">
+                <div class="orders-header">
+                    <h2>Recent Orders</h2>
+                    <select id="orderFilter" style="padding: 8px 12px; border-radius: 5px; border: 1px solid #ddd;">
+                        <option value="all">All Orders</option>
+                        <option value="pending">Pending</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="delivered">Delivered</option>
+                    </select>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="orders-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersTableBody">
+                            <!-- Orders loaded by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </main>
-    </div>
-
-    <!-- Order Details Modal -->
-    <div class="order-modal" id="orderModal">
-        <div class="order-modal-content">
-            <div class="order-modal-header">
-                <h3>Order Details <span id="modalOrderId"></span></h3>
-                <button class="close-modal" id="closeOrderModal">&times;</button>
-            </div>
-            <div class="order-modal-body">
-                <div class="order-details-grid">
-                    <div>
-                        <h4>Customer Information</h4>
-                        <p><strong>Name:</strong> <span id="modalCustomerName"></span></p>
-                        <p><strong>Phone:</strong> <span id="modalCustomerPhone"></span></p>
-                        <p><strong>Address:</strong> <span id="modalCustomerAddress"></span></p>
-                    </div>
-                    <div>
-                        <h4>Order Information</h4>
-                        <p><strong>Date:</strong> <span id="modalOrderDate"></span></p>
-                        <p><strong>Status:</strong> <span id="modalOrderStatus"></span></p>
-                        <p><strong>Payment:</strong> <span id="modalPaymentMethod"></span></p>
-                    </div>
-                </div>
-                
-                <div class="order-items">
-                    <h4>Order Items</h4>
-                    <div id="modalOrderItems">
-                        <!-- Order items will be added here -->
-                    </div>
-                    <div class="order-total">
-                        <p><strong>Total Amount:</strong> <span id="modalOrderTotal"></span></p>
-                    </div>
-                </div>
-                
-                <div class="order-actions">
-                    <button class="status-btn" data-status="pending">Mark as Pending</button>
-                    <button class="status-btn" data-status="confirmed">Mark as Confirmed</button>
-                    <button class="status-btn" data-status="delivered">Mark as Delivered</button>
-                </div>
-            </div>
-        </div>
     </div>
 
     <script>
         // Admin Panel JavaScript
         document.addEventListener('DOMContentLoaded', function() {
+            const ADMIN_CREDENTIALS = {
+                username: 'admin',
+                password: 'admin123'
+            };
+
             // Login functionality
             const loginBtn = document.getElementById('loginBtn');
             const logoutBtn = document.getElementById('logoutBtn');
             const loginScreen = document.getElementById('loginScreen');
             const adminDashboard = document.getElementById('adminDashboard');
             const loginError = document.getElementById('loginError');
-            
-            // Default admin credentials
-            const ADMIN_USERNAME = 'admin';
-            const ADMIN_PASSWORD = 'admin123';
-            
+
+            // Check if already logged in
+            if (localStorage.getItem('adminLoggedIn') === 'true') {
+                showDashboard();
+            }
+
             // Login button click
             loginBtn.addEventListener('click', function() {
-                const username = document.getElementById('adminUsername').value;
+                const username = document.getElementById('adminUsername').value.trim();
                 const password = document.getElementById('adminPassword').value;
-                
-                if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-                    // Successful login
-                    loginScreen.style.display = 'none';
-                    adminDashboard.style.display = 'block';
-                    document.getElementById('adminName').textContent = username;
-                    
-                    // Save login state
+
+                if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
                     localStorage.setItem('adminLoggedIn', 'true');
                     localStorage.setItem('adminUsername', username);
-                    
-                    // Load orders data
-                    loadOrders();
+                    showDashboard();
                 } else {
-                    // Failed login
                     loginError.style.display = 'block';
+                    setTimeout(() => {
+                        loginError.style.display = 'none';
+                    }, 3000);
                 }
             });
-            
+
             // Logout button click
             logoutBtn.addEventListener('click', function() {
                 localStorage.removeItem('adminLoggedIn');
                 localStorage.removeItem('adminUsername');
                 adminDashboard.style.display = 'none';
                 loginScreen.style.display = 'flex';
-                
-                // Clear form
                 document.getElementById('adminUsername').value = '';
                 document.getElementById('adminPassword').value = '';
-                loginError.style.display = 'none';
             });
-            
-            // Check if already logged in
-            if (localStorage.getItem('adminLoggedIn') === 'true') {
+
+            function showDashboard() {
                 loginScreen.style.display = 'none';
                 adminDashboard.style.display = 'block';
-                document.getElementById('adminName').textContent = 
-                    localStorage.getItem('adminUsername') || 'Admin';
+                
+                // Load orders from localStorage
                 loadOrders();
+                updateStats();
             }
-            
-            // Load sample orders
+
+            // Sample orders data
+            const sampleOrders = [
+                {
+                    id: 'ORD-1001',
+                    customer: 'Rahul Sharma',
+                    phone: '+91 9876543210',
+                    address: 'Mumbai, Maharashtra',
+                    date: '2023-10-15',
+                    amount: 4699,
+                    status: 'pending',
+                    items: [
+                        { name: 'Safari Pentagon Backpack', price: 4699, quantity: 1 }
+                    ]
+                },
+                {
+                    id: 'ORD-1002',
+                    customer: 'Priya Patel',
+                    phone: '+91 8765432109',
+                    address: 'Delhi, NCR',
+                    date: '2023-10-14',
+                    amount: 6099,
+                    status: 'confirmed',
+                    items: [
+                        { name: 'Safari Thorium Backpack', price: 6099, quantity: 1 }
+                    ]
+                },
+                {
+                    id: 'ORD-1003',
+                    customer: 'Amit Kumar',
+                    phone: '+91 7654321098',
+                    address: 'Bangalore, Karnataka',
+                    date: '2023-10-13',
+                    amount: 12999,
+                    status: 'delivered',
+                    items: [
+                        { name: 'Wireless Headphones', price: 2499, quantity: 1 },
+                        { name: 'Smart Watch', price: 3999, quantity: 1 },
+                        { name: 'Mobile Case', price: 499, quantity: 2 }
+                    ]
+                }
+            ];
+
             function loadOrders() {
-                // Sample orders data
-                const orders = [
-                    {
-                        id: 'ORD-001',
-                        customer: 'Rahul Sharma',
-                        date: '2023-10-15',
-                        amount: 2499,
-                        status: 'pending',
-                        items: [
-                            { name: 'Wireless Headphones', price: 2499, quantity: 1 }
-                        ]
-                    },
-                    {
-                        id: 'ORD-002',
-                        customer: 'Priya Patel',
-                        date: '2023-10-14',
-                        amount: 1299,
-                        status: 'confirmed',
-                        items: [
-                            { name: "Men's Casual Shirt", price: 1299, quantity: 1 }
-                        ]
-                    }
-                ];
-                
-                // Update stats
-                document.getElementById('totalOrders').textContent = orders.length;
-                document.getElementById('pendingOrders').textContent = 
-                    orders.filter(o => o.status === 'pending').length;
-                document.getElementById('totalRevenue').textContent = 
-                    '₹' + orders.reduce((sum, o) => sum + o.amount, 0);
-                document.getElementById('todaysOrders').textContent = 2; // Example
-                
-                // Update orders table
                 const tbody = document.getElementById('ordersTableBody');
                 tbody.innerHTML = '';
-                
+
+                // Get orders from localStorage or use sample
+                const orders = JSON.parse(localStorage.getItem('customerOrders')) || sampleOrders;
+
                 orders.forEach(order => {
                     const row = document.createElement('tr');
-                    row.className = 'order-row';
                     row.innerHTML = `
                         <td>${order.id}</td>
-                        <td>${order.customer}</td>
+                        <td>
+                            <strong>${order.customer}</strong><br>
+                            <small>${order.phone}</small>
+                        </td>
                         <td>${order.date}</td>
-                        <td>₹${order.amount}</td>
+                        <td>₹${order.amount.toLocaleString()}</td>
                         <td>
                             <span class="order-status status-${order.status}">
                                 ${order.status.charAt(0).toUpperCase() + order.status.slice(1)}
                             </span>
                         </td>
                         <td>
-                            <button class="view-order-btn" data-id="${order.id}">
-                                View
+                            <button class="action-btn view-btn" onclick="viewOrder('${order.id}')">
+                                <i class="fas fa-eye"></i> View
                             </button>
                         </td>
                     `;
                     tbody.appendChild(row);
                 });
             }
-            
-            // Order modal functionality
-            const orderModal = document.getElementById('orderModal');
-            const closeOrderModal = document.getElementById('closeOrderModal');
-            
-            // Close modal
-            closeOrderModal.addEventListener('click', function() {
-                orderModal.style.display = 'none';
-            });
-            
-            // View order button click
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('view-order-btn')) {
-                    const orderId = e.target.dataset.id;
-                    // For demo, show sample order
-                    showOrderDetails({
-                        id: 'ORD-001',
-                        customer: 'Rahul Sharma',
-                        phone: '+91 9876543210',
-                        address: '123 Main Street, Mumbai, Maharashtra',
-                        date: '2023-10-15',
-                        status: 'pending',
-                        payment: 'Cash on Delivery',
-                        items: [
-                            { name: 'Wireless Bluetooth Headphones', price: 2499, quantity: 1 }
-                        ],
-                        total: 2499
-                    });
-                }
+
+            function updateStats() {
+                const orders = JSON.parse(localStorage.getItem('customerOrders')) || sampleOrders;
                 
-                if (e.target.classList.contains('status-btn')) {
-                    const status = e.target.dataset.status;
-                    alert(`Order status changed to: ${status}`);
-                    // Here you would update the order status in your database
-                }
-            });
-            
-            function showOrderDetails(order) {
-                document.getElementById('modalOrderId').textContent = order.id;
-                document.getElementById('modalCustomerName').textContent = order.customer;
-                document.getElementById('modalCustomerPhone').textContent = order.phone;
-                document.getElementById('modalCustomerAddress').textContent = order.address;
-                document.getElementById('modalOrderDate').textContent = order.date;
-                document.getElementById('modalOrderStatus').textContent = 
-                    order.status.charAt(0).toUpperCase() + order.status.slice(1);
-                document.getElementById('modalPaymentMethod').textContent = order.payment;
+                document.getElementById('totalOrders').textContent = orders.length;
+                document.getElementById('pendingOrders').textContent = 
+                    orders.filter(o => o.status === 'pending').length;
                 
-                // Order items
-                const itemsContainer = document.getElementById('modalOrderItems');
-                itemsContainer.innerHTML = '';
-                order.items.forEach(item => {
-                    const itemDiv = document.createElement('div');
-                    itemDiv.className = 'order-item';
-                    itemDiv.innerHTML = `
-                        <span>${item.name} x ${item.quantity}</span>
-                        <span>₹${item.price * item.quantity}</span>
-                    `;
-                    itemsContainer.appendChild(itemDiv);
-                });
+                const totalRevenue = orders.reduce((sum, order) => sum + order.amount, 0);
+                document.getElementById('totalRevenue').textContent = `₹${totalRevenue.toLocaleString()}`;
                 
-                document.getElementById('modalOrderTotal').textContent = '₹' + order.total;
-                orderModal.style.display = 'flex';
+                const today = new Date().toISOString().split('T')[0];
+                const todaysOrders = orders.filter(o => o.date === today).length;
+                document.getElementById('todaysOrders').textContent = todaysOrders;
             }
-            
-            // Close modal when clicking outside
-            window.addEventListener('click', function(e) {
-                if (e.target === orderModal) {
-                    orderModal.style.display = 'none';
-                }
-            });
-            
+
             // Filter orders
-            const orderFilter = document.getElementById('orderFilter');
-            orderFilter.addEventListener('change', function() {
-                alert(`Filtering orders by: ${this.value}`);
-                // Here you would filter the orders based on status
+            document.getElementById('orderFilter').addEventListener('change', function() {
+                const status = this.value;
+                alert(`Filtering by: ${status}`);
+                // Implement actual filtering here
             });
+
+            // Make viewOrder function global
+            window.viewOrder = function(orderId) {
+                const orders = JSON.parse(localStorage.getItem('customerOrders')) || sampleOrders;
+                const order = orders.find(o => o.id === orderId);
+                
+                if (order) {
+                    let message = `Order Details:\n`;
+                    message += `Order ID: ${order.id}\n`;
+                    message += `Customer: ${order.customer}\n`;
+                    message += `Phone: ${order.phone}\n`;
+                    message += `Address: ${order.address}\n`;
+                    message += `Date: ${order.date}\n`;
+                    message += `Status: ${order.status}\n`;
+                    message += `Amount: ₹${order.amount}\n\n`;
+                    message += `Items:\n`;
+                    order.items.forEach(item => {
+                        message += `- ${item.name} x ${item.quantity} = ₹${item.price * item.quantity}\n`;
+                    });
+                    
+                    alert(message);
+                }
+            };
+
+            // Auto-refresh orders every 30 seconds
+            setInterval(updateStats, 30000);
         });
     </script>
 </body>
 </html>
-
-
