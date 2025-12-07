@@ -288,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const phoneNumber = "917643806356"; // Replace with actual admin number
         
         // Open WhatsApp
-        window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
+        window.open(`https://wa.me/${917643806356}?text=${Hello sir}`, '_blank');
         
         // Save order to admin
         saveCompleteOrderToAdmin(totalAmount);
